@@ -8,8 +8,8 @@ public interface IDataRepository
     void Redo();
     void Undo();
 
-    public bool CanUndo { get; }    
-    public bool CanRedo { get; }    
+    public bool CanUndo { get; }
+    public bool CanRedo { get; }
 
     public DataRecord? Value { get; }
 }
