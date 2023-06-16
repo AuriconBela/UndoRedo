@@ -29,7 +29,7 @@ public class RelayCommand<T> : ICommandExtended
     /// </summary>
     /// <param name="parameter"></param>
     /// <returns></returns>
-    public bool CanExecute(object? parameter) => _canExecute == null || _canExecute((T)parameter);
-    public void Execute(object? parameter) => _execute((T)parameter);
+    public bool CanExecute(object? parameter) => _canExecute == null || _canExecute((T)parameter!);
+    public void Execute(object? parameter) => _execute((T)parameter!);
     public void OnCanExecuteChanged() => CanExecuteChanged?.Invoke(this, EventArgs.Empty);
 }

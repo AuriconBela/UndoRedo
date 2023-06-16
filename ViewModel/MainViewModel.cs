@@ -10,18 +10,18 @@ namespace UndoRedo.ViewModel;
 
 public class MainViewModel : IMainViewModel
 {
-    private readonly IDataRepository _repository;
+    private readonly IDataRepository? _repository;
 
-    private readonly ICommandExtended _addCommand;
+    private readonly ICommandExtended? _addCommand;
 
-    private readonly ICommandExtended _undoCommand;
+    private readonly ICommandExtended? _undoCommand;
 
-    private readonly ICommandExtended _redoCommand;
-
-    public event PropertyChangedEventHandler? PropertyChanged;
+    private readonly ICommandExtended? _redoCommand;
 
     private static readonly PropertyChangedEventArgs _emptyChangeArgs = new(string.Empty);
     private static readonly IDictionary<string, PropertyChangedEventArgs> _changedProperties = new Dictionary<string, PropertyChangedEventArgs>();
+
+    public event PropertyChangedEventHandler? PropertyChanged;
 
     public MainViewModel()
     {
@@ -41,45 +41,45 @@ public class MainViewModel : IMainViewModel
     public static string RedoString => Constants.Redo;
     public static string SaveString => Constants.Save;
 
-    public ICommandExtended AddCommand => _addCommand;
-    public ICommandExtended UndoCommand => _undoCommand;
-    public ICommandExtended RedoCommand => _redoCommand;
+    public ICommandExtended AddCommand => _addCommand!;
+    public ICommandExtended UndoCommand => _undoCommand!;
+    public ICommandExtended RedoCommand => _redoCommand!;
 
-    public DataRecord? Value => _repository.Value;
+    public DataRecord? Value => _repository!.Value;
     private void AddAction(string value)
     {
-        _repository.DoCommand(new DataRecord(value, DateTime.Now));
+        _repository?.DoCommand(new DataRecord(value, DateTime.Now));
         Changed();
     }
 
     private void UndoAction(DataRecord record)
     {
-        _repository.Undo();
+        _repository?.Undo();
         Changed();
     }
 
     private void RedoAction(DataRecord record)
     {
-        _repository.Redo();
+        _repository?.Redo();
         Changed();
     }
 
     private void Changed()
     {
-        _addCommand.OnCanExecuteChanged();
-        _undoCommand.OnCanExecuteChanged();
-        _redoCommand.OnCanExecuteChanged();
+        _addCommand?.OnCanExecuteChanged();
+        _undoCommand?.OnCanExecuteChanged();
+        _redoCommand?.OnCanExecuteChanged();
         OnPropertyChanged(nameof(Value));
     }
 
     private bool CanExecuteForRedo(DataRecord record)
     {
-        return _repository.CanRedo;
+        return _repository?.CanRedo ?? false;
     }
 
     private bool CanExecuteForUndo(DataRecord record)
     {
-        return _repository.CanUndo;
+        return _repository?.CanUndo ?? false;
     }
 
 
