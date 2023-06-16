@@ -66,7 +66,6 @@ public class MainViewModel : IMainViewModel
 
     private void Changed()
     {
-        _addCommand?.OnCanExecuteChanged();
         _undoCommand?.OnCanExecuteChanged();
         _redoCommand?.OnCanExecuteChanged();
         OnPropertyChanged(nameof(Value));
