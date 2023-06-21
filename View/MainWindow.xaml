@@ -7,6 +7,7 @@
         mc:Ignorable="d"
         Title="{Binding TitleString}"
         SizeToContent="WidthAndHeight"
+        WindowStartupLocation="CenterScreen"
         d:DataContext="{d:DesignInstance Type=viewModels:MainViewModel, IsDesignTimeCreatable=True}">
     <Grid>
         <TextBox x:Name="tbData" Text="{Binding Value.Value, Mode=OneWay}" HorizontalAlignment="Left" Height="148" Margin="10,38,10,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="281"/>
