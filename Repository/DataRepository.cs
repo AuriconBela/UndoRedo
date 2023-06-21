@@ -12,6 +12,7 @@ public class DataRepository : IDataRepository
     public void DoCommand(DataRecord command)
     {
         _undoList.Push(command);
+        _redoList.Clear();
     }
     public void Redo()
     {
